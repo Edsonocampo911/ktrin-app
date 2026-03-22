@@ -9,17 +9,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import { 
   Calendar, 
   ArrowLeft, 
   ArrowRight, 
   User, 
-  Briefcase, 
-  PartyPopper,
+  Briefcase,
   CheckCircle2,
-  Loader2,
-  Building2
+  Loader2
 } from "lucide-react";
 import toast from "react-hot-toast";
 import type { UserRole } from "@/types/database";
@@ -186,13 +183,13 @@ export default function RegisterPage() {
         
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Paso 1: Selección de Rol */}
+            {/* Paso 1: Selección de Rol - Solo 2 opciones */}
             {currentStep === 1 && (
               <div className="space-y-4">
                 <p className="text-center text-gray-600 mb-4">¿Cómo vas a usar KTRIN?</p>
                 
                 <Tabs value={role} onValueChange={(v) => setRole(v as UserRole)}>
-                  <TabsList className="grid grid-cols-3 w-full">
+                  <TabsList className="grid grid-cols-2 w-full">
                     <TabsTrigger value="organizer" className="flex flex-col items-center gap-2 py-4">
                       <User className="w-6 h-6" />
                       <span className="text-sm">Organizador</span>
@@ -202,11 +199,6 @@ export default function RegisterPage() {
                       <Briefcase className="w-6 h-6" />
                       <span className="text-sm">Proveedor</span>
                       <span className="text-xs text-gray-500">Ofrezco servicios</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="guest" className="flex flex-col items-center gap-2 py-4">
-                      <PartyPopper className="w-6 h-6" />
-                      <span className="text-sm">Invitado</span>
-                      <span className="text-xs text-gray-500">Asisto a eventos</span>
                     </TabsTrigger>
                   </TabsList>
 
@@ -218,6 +210,7 @@ export default function RegisterPage() {
                         <li>• Contratar proveedores verificados</li>
                         <li>• Validar servicios con QR</li>
                         <li>• Gestionar invitados</li>
+                        <li>• <strong>Ser invitado de otros eventos</strong></li>
                       </ul>
                     </div>
                   </TabsContent>
@@ -230,18 +223,6 @@ export default function RegisterPage() {
                         <li>• Recibir solicitudes de eventos</li>
                         <li>• Construir tu reputación</li>
                         <li>• Recibir pagos seguros</li>
-                      </ul>
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="guest" className="mt-4">
-                    <div className="bg-violet-50 p-4 rounded-lg">
-                      <h4 className="font-medium text-violet-900 mb-2">Como Invitado podrás:</h4>
-                      <ul className="text-sm text-violet-700 space-y-1">
-                        <li>• Confirmar asistencia con QR</li>
-                        <li>• Declarar restricciones alimentarias</li>
-                        <li>• Ver información del evento</li>
-                        <li>• Sin necesidad de crear cuenta</li>
                       </ul>
                     </div>
                   </TabsContent>
@@ -407,4 +388,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-

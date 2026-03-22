@@ -19,9 +19,9 @@ import {
   CheckCircle2,
   User,
   Briefcase,
-  PartyPopper,
   LogIn,
-  Loader2
+  Loader2,
+  Heart
 } from "lucide-react";
 import toast from "react-hot-toast";
 import type { UserRole } from "@/types/database";
@@ -149,12 +149,9 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-6 text-sm text-white/60">
-          <span>v1.0.0</span>
-          <span>•</span>
-          <span>Paraguay</span>
-          <span>•</span>
-          <span>2026</span>
+        <div className="flex items-center gap-2 text-sm text-white/60">
+          <span>Hecho en Paraguay</span>
+          <Heart className="w-4 h-4 text-rose-300 fill-rose-300" />
         </div>
       </div>
 
@@ -178,9 +175,9 @@ export default function LoginPage() {
           </CardHeader>
           
           <CardContent className="space-y-6">
-            {/* Role Selector */}
+            {/* Role Selector - Solo 2 pestañas */}
             <Tabs value={selectedRole} onValueChange={(v) => setSelectedRole(v as UserRole)}>
-              <TabsList className="grid grid-cols-3 w-full">
+              <TabsList className="grid grid-cols-2 w-full">
                 <TabsTrigger value="organizer" className="flex flex-col items-center gap-1 py-2">
                   <User className="w-4 h-4" />
                   <span className="text-xs">Organizador</span>
@@ -188,10 +185,6 @@ export default function LoginPage() {
                 <TabsTrigger value="provider" className="flex flex-col items-center gap-1 py-2">
                   <Briefcase className="w-4 h-4" />
                   <span className="text-xs">Proveedor</span>
-                </TabsTrigger>
-                <TabsTrigger value="guest" className="flex flex-col items-center gap-1 py-2">
-                  <PartyPopper className="w-4 h-4" />
-                  <span className="text-xs">Invitado</span>
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -286,14 +279,11 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            {/* Badges */}
+            {/* Badges - Footer corregido */}
             <div className="flex justify-center gap-2 pt-2">
-              <Badge variant="secondary" className="text-xs">
-                <CheckCircle2 className="w-3 h-3 mr-1" />
-                Fase 1 MVP
-              </Badge>
-              <Badge variant="outline" className="text-xs">
-                Paraguay
+              <Badge variant="secondary" className="text-xs flex items-center gap-1">
+                <span>Hecho en Paraguay</span>
+                <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
               </Badge>
             </div>
           </CardContent>
@@ -302,4 +292,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
