@@ -155,7 +155,7 @@ export default function EventDetailPage() {
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Button variant="ghost" onClick={() => router.push("/organizer/dashboard")}>
+            <Button variant="ghost" onClick={() => router.push("/dashboard")}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Volver
             </Button>
@@ -234,7 +234,7 @@ export default function EventDetailPage() {
             
             {event.status === 'IN_PROGRESS' && (
               <div className="mt-4 flex justify-end">
-                <Link href={`/organizer/events/${eventId}/qr-scan`}>
+                <Link href={`/events/${eventId}/qr-scan`}>
                   <Button className="bg-gradient-to-r from-violet-600 to-rose-500">
                     <QrCode className="w-4 h-4 mr-2" />
                     Escanear QR de Proveedor

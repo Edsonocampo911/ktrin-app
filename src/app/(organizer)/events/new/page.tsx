@@ -61,7 +61,7 @@ export default function CreateEventPage() {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     } else {
-      router.push("/organizer/dashboard");
+      router.push("/dashboard");
     }
   };
 
@@ -121,7 +121,7 @@ export default function CreateEventPage() {
       }
 
       toast.success("Evento creado exitosamente");
-      router.push("/organizer/dashboard");
+      router.push("/dashboard");
     } catch (error: any) {
       toast.error(error.message || "Error al crear el evento");
     } finally {

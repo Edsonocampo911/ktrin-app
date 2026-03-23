@@ -482,7 +482,7 @@ export default function ProviderDashboard() {
                         </div>
                         
                         {service.status === 'ACCEPTED' && service.qr_token && (
-                          <Link href={`/provider/qr/${service.id}`}>
+                          <Link href={`/qr/${service.id}`}>
                             <Button className="bg-gradient-to-r from-violet-600 to-rose-500">
                               <QrCode className="w-4 h-4 mr-2" />
                               Ver QR
@@ -511,7 +511,7 @@ export default function ProviderDashboard() {
               <p className="text-gray-500 mb-4">
                 Gestiona los servicios que ofreces a los organizadores
               </p>
-              <Link href="/provider/services">
+              <Link href="/services">
                 <Button className="bg-gradient-to-r from-violet-600 to-rose-500">
                   Gestionar Servicios
                 </Button>

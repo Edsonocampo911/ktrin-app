@@ -305,7 +305,7 @@ export default function OrganizerDashboard() {
             <p className="text-gray-500">Gestiona tus eventos y proveedores</p>
           </div>
           
-          <Link href="/organizer/events/new">
+          <Link href="/events/new">
             <Button className="bg-gradient-to-r from-violet-600 to-rose-500 hover:from-violet-700 hover:to-rose-600">
               <Plus className="w-4 h-4 mr-2" />
               Crear Evento
@@ -330,7 +330,7 @@ export default function OrganizerDashboard() {
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">No tienes eventos</h3>
                 <p className="text-gray-500 mb-4">Crea tu primer evento para comenzar</p>
-                <Link href="/organizer/events/new">
+                <Link href="/events/new">
                   <Button className="bg-gradient-to-r from-violet-600 to-rose-500">
                     <Plus className="w-4 h-4 mr-2" />
                     Crear Evento
@@ -339,7 +339,7 @@ export default function OrganizerDashboard() {
               </Card>
             ) : (
               events.map((event) => (
-                <Link key={event.id} href={`/organizer/events/${event.id}`}>
+                <Link key={event.id} href={`/events/${event.id}`}>
                   <Card className="hover:shadow-md transition-shadow cursor-pointer mb-4">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between">
@@ -421,7 +421,7 @@ export default function OrganizerDashboard() {
                           {new Date(event.event_date).toLocaleDateString('es-PY')}
                         </p>
                       </div>
-                      <Link href={`/organizer/events/${event.id}`}>
+                      <Link href={`/events/${event.id}`}>
                         <Button variant="outline">Ver detalles</Button>
                       </Link>
                     </div>
@@ -444,7 +444,7 @@ export default function OrganizerDashboard() {
                         </div>
                         <p className="text-gray-500">{event.location}</p>
                       </div>
-                      <Link href={`/organizer/events/${event.id}/qr-scan`}>
+                      <Link href={`/events/${event.id}/qr-scan`}>
                         <Button className="bg-gradient-to-r from-violet-600 to-rose-500">
                           <QrCode className="w-4 h-4 mr-2" />
                           Escanear QR
@@ -469,7 +469,7 @@ export default function OrganizerDashboard() {
                           Completado el {new Date(event.event_date).toLocaleDateString('es-PY')}
                         </p>
                       </div>
-                      <Link href={`/organizer/events/${event.id}`}>
+                      <Link href={`/events/${event.id}`}>
                         <Button variant="outline">Ver resumen</Button>
                       </Link>
                     </div>
