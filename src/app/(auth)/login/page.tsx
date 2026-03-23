@@ -58,9 +58,9 @@ export default function LoginPage() {
         
         // Redirect based on role
         if (profile?.role === "provider") {
-          router.push("/provider/dashboard");
+          router.push("/provider-dashboard");
         } else {
-          router.push("/organizer/dashboard");
+          router.push("/dashboard");
         }
       }
     } catch (error: any) {
@@ -96,9 +96,9 @@ export default function LoginPage() {
       toast.success(`Modo Demo: ${role === "organizer" ? "Organizador" : "Proveedor"}`);
       
       if (role === "provider") {
-        router.push("/provider/dashboard");
+        router.push("/provider-dashboard");
       } else {
-        router.push("/organizer/dashboard");
+        router.push("/dashboard");
       }
     } catch (error: any) {
       toast.error(error.message);
