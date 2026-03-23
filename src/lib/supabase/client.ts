@@ -1,5 +1,5 @@
 ﻿import { createBrowserClient } from '@supabase/ssr';
-import { Database } from '@/types/database';
+import type { Database } from '@/types/database';
 
 export const createClient = () =>
   createBrowserClient<Database>(
@@ -7,5 +7,5 @@ export const createClient = () =>
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 
-export const supabase = createClient();
+export const supabase: ReturnType<typeof createClient> = createClient();
 

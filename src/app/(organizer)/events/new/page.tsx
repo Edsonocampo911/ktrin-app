@@ -81,13 +81,13 @@ export default function CreateEventPage() {
         .from("profiles")
         .select("id")
         .eq("user_id", user.id)
-        .single();
+        .single() as any;
 
       const { data: organizerData } = await supabase
         .from("organizers")
         .select("id")
-        .eq("profile_id", profileData.id)
-        .single();
+        .eq("profile_id", profileData?.id)
+        .single() as any;
 
       // Create event
       const { data: event, error: eventError } = await supabase
@@ -102,7 +102,7 @@ export default function CreateEventPage() {
           location: eventData.location,
           expected_guests: eventData.expected_guests,
           status: 'CONFIRMED',
-        })
+        } as any)
         .select()
         .single();
 
@@ -117,7 +117,7 @@ export default function CreateEventPage() {
           end_time: s.end_time,
         }));
 
-        await supabase.from("event_sessions").insert(sessionsData);
+        await supabase.from("event_sessions").insert(sessionsData as any);
       }
 
       toast.success("Evento creado exitosamente");

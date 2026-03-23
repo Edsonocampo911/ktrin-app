@@ -91,9 +91,9 @@ export default function RegisterPage() {
             email: formData.email,
             phone: formData.phone || null,
             role: role,
-          })
+          } as any)
           .select()
-          .single();
+          .single() as any;
 
         if (profileError) throw profileError;
 
@@ -104,7 +104,7 @@ export default function RegisterPage() {
             .insert({
               profile_id: profileData.id,
               business_name: formData.business_name || null,
-            });
+            } as any);
           
           if (organizerError) throw organizerError;
         } else if (role === "provider") {
@@ -115,7 +115,7 @@ export default function RegisterPage() {
               business_name: formData.business_name,
               base_zone: "Asunción", // Default zone
               category: "OTROS",
-            });
+            } as any);
           
           if (providerError) throw providerError;
         }

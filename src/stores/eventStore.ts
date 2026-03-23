@@ -129,7 +129,7 @@ export const useEventStore = create<EventState>((set, get) => ({
           organizer_id: user.id,
           ...data,
           status: "DRAFT",
-        })
+        } as any)
         .select()
         .single();
 

@@ -76,7 +76,7 @@ export default function OrganizerDashboard() {
         .from("profiles")
         .select("*")
         .eq("user_id", user.id)
-        .single();
+        .single() as any;
       
       if (profileData) {
         setProfile(profileData);
@@ -86,7 +86,7 @@ export default function OrganizerDashboard() {
           .from("organizers")
           .select("*")
           .eq("profile_id", profileData.id)
-          .single();
+          .single() as any;
         
         setOrganizer(organizerData);
 
@@ -95,19 +95,19 @@ export default function OrganizerDashboard() {
           .from("events")
           .select("*")
           .eq("organizer_id", organizerData?.id)
-          .order("event_date", { ascending: false });
+          .order("event_date", { ascending: false }) as any;
         
         setEvents(eventsData || []);
 
         // Calculate stats
         const total = eventsData?.length || 0;
-        const active = eventsData?.filter(e => 
+        const active = eventsData?.filter((e: any) => 
           ['OPEN', 'CONFIRMED', 'IN_PROGRESS'].includes(e.status)
         ).length || 0;
-        const completed = eventsData?.filter(e => 
+        const completed = eventsData?.filter((e: any) => 
           ['COMPLETED', 'FULLY_VALIDATED', 'PARTIALLY_VALIDATED'].includes(e.status)
         ).length || 0;
-        const upcoming = eventsData?.filter(e => 
+        const upcoming = eventsData?.filter((e: any) => 
           new Date(e.event_date) > new Date() && e.status !== 'CANCELLED'
         ).length || 0;
 
@@ -120,11 +120,11 @@ export default function OrganizerDashboard() {
 
         // Get event services for all events
         if (eventsData && eventsData.length > 0) {
-          const eventIds = eventsData.map(e => e.id);
+          const eventIds = eventsData.map((e: any) => e.id);
           const { data: servicesData } = await supabase
             .from("event_services")
             .select("*")
-            .in("event_id", eventIds);
+            .in("event_id", eventIds) as any;
           
           setEventServices(servicesData || []);
         }

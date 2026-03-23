@@ -106,7 +106,7 @@ export default function InvitePage({ params }: InvitePageProps) {
           event_id: invite?.event_id,
           guest_id: user.id,
           status: "CONFIRMED",
-        }, {
+        } as any, {
           onConflict: "event_id,guest_id"
         });
 

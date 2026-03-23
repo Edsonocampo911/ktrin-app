@@ -59,8 +59,10 @@ export default function LoginPage() {
         // Redirect based on role
         if (profile?.role === "provider") {
           router.push("/provider-dashboard");
-        } else {
+        } else if (profile?.role === "organizer") {
           router.push("/dashboard");
+        } else {
+          router.push("/");
         }
       }
     } catch (error: any) {
@@ -97,6 +99,8 @@ export default function LoginPage() {
       
       if (role === "provider") {
         router.push("/provider-dashboard");
+      } else if (role === "organizer") {
+        router.push("/dashboard");
       } else {
         router.push("/dashboard");
       }

@@ -7,11 +7,10 @@
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  // Note: Type checking errors are temporarily disabled due to Supabase typing issues
+  // TODO: Fix TypeScript types for Supabase queries (see SUPABASE_TYPING_ISSUES.md)
   typescript: {
-    ignoreBuildErrors: true
-  },
-  eslint: {
-    ignoreDuringBuilds: true
+    ignoreBuildErrors: true,
   },
   images: {
     remotePatterns: [

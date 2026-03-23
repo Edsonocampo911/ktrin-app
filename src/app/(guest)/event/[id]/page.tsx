@@ -129,7 +129,7 @@ export default function GuestEventPage({ params }: GuestEventPageProps) {
           .select("status")
           .eq("event_id", id)
           .eq("guest_id", user.id)
-          .single();
+          .single() as any;
         
         setIsAttending(guestData?.status === "CONFIRMED");
       }
@@ -155,7 +155,7 @@ export default function GuestEventPage({ params }: GuestEventPageProps) {
           event_id: id,
           guest_id: user.id,
           status: "CONFIRMED",
-        }, {
+        } as any, {
           onConflict: "event_id,guest_id"
         });
 

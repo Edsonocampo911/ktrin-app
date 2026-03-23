@@ -111,7 +111,7 @@ export default function ProviderServicesPage() {
       } else {
         const { error } = await supabase
           .from("services")
-          .insert(serviceData);
+          .insert(serviceData as any);
 
         if (error) throw error;
         toast.success("Servicio creado");

@@ -33,6 +33,7 @@ export default function QRScanner({ eventId, onClose }: QRScannerProps) {
     serviceName?: string;
   } | null>(null);
   const [flashlight, setFlashlight] = useState(false);
+  const [cameraError, setCameraError] = useState<string | null>(null);
 
   useEffect(() => {
     // Initialize scanner
@@ -41,6 +42,11 @@ export default function QRScanner({ eventId, onClose }: QRScannerProps) {
 
     const startScanning = async () => {
       try {
+        // Request camera permissions
+        await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "environment" },
+        });
+
         await scanner.start(
           { facingMode: "environment" },
           {
@@ -54,9 +60,20 @@ export default function QRScanner({ eventId, onClose }: QRScannerProps) {
             // QR not found - ignore
           }
         );
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error starting scanner:", error);
-        toast.error("Error al iniciar la cámara. Asegúrate de dar permisos.");
+        let errorMessage = "Error al iniciar la cámara";
+        
+        if (error.name === "NotAllowedError") {
+          errorMessage = "Debes permitir el acceso a la cámara";
+        } else if (error.name === "NotFoundError") {
+          errorMessage = "No se encontró cámara en este dispositivo";
+        } else if (error.name === "NotReadableError") {
+          errorMessage = "La cámara está siendo usada por otra aplicación";
+        }
+        
+        setCameraError(errorMessage);
+        toast.error(errorMessage);
       }
     };
 
@@ -270,13 +287,35 @@ export default function QRScanner({ eventId, onClose }: QRScannerProps) {
         )}
       </div>
 
-      {/* Footer Instructions */}
-      {scanning && !result && (
-        <div className="p-6 text-center">
-          <p className="text-white/70 text-sm">
-            Escanea el QR verde del proveedor para validar que cumplió con el servicio
-          </p>
+      {/* Footer Instructions or Error */}
+      {cameraError ? (
+        <div className="p-6">
+          <Card className="border-red-500 bg-red-50">
+            <CardContent className="p-6 text-center">
+              <XCircle className="w-12 h-12 text-red-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-red-900 mb-2">Error de Cámara</h3>
+              <p className="text-red-800 mb-6">{cameraError}</p>
+              <Button 
+                onClick={() => {
+                  setCameraError(null);
+                  window.location.reload();
+                }}
+                className="w-full"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Reintentar
+              </Button>
+            </CardContent>
+          </Card>
         </div>
+      ) : (
+        scanning && !result && (
+          <div className="p-6 text-center">
+            <p className="text-white/70 text-sm">
+              Escanea el QR verde del proveedor para validar que cumplió con el servicio
+            </p>
+          </div>
+        )
       )}
     </div>
   );
